@@ -41,7 +41,10 @@ img:hover {
 } */
 /* Styles pour le lien de retour */
 .back-link {
-    text-align: top-left;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    text-align: left;
     margin: 10px 0;
 }
 
