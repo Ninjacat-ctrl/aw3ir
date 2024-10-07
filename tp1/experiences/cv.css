@@ -36,8 +36,51 @@ img:hover {
     transition: transform 0.3s ease-in-out;
 }
 
-body {
+/* body {
     background: linear-gradient(120deg, #f0f0f0 0%, #b0c4de 100%);
+} */
+/* Styles pour le lien de retour */
+.back-link {
+    text-align: left;
+    margin: 10px 0;
+}
+
+.back-link a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+
+.personal-info {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.personal-info table {
+    width: 80%; 
+    margin: 0 auto; 
+    border-collapse: collapse; 
+}
+
+.personal-info td {
+    padding: 10px; 
+    border: 1px solid #ccc; 
+}
+
+
+a {
+    color: #2a5d9f; 
+    text-decoration: none; 
+}
+
+a:hover {
+    color: #ff6600; 
+}
+
+
+img {
+    margin-top: 10px; 
 }
 
 @media only screen and (max-width: 600px) {
