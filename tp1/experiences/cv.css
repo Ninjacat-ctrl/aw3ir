@@ -41,7 +41,7 @@ img:hover {
 } */
 /* Styles pour le lien de retour */
 .back-link {
-    text-align: left;
+    text-align: top-left;
     margin: 10px 0;
 }
 
