@@ -11,7 +11,7 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png" />
   <!-- Place favicon.ico in the root directory -->
 
-  <style>
+  <!-- <style>
     body {
       background-color: #e9ebee;
       font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco",
@@ -20,53 +20,54 @@
       margin: 0 auto;
       max-width: 800px;
     }
-  </style>
+  </style> -->
 
   <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-  <!--<link rel="stylesheet" href="style.css">-->
-  <!--<script src="js/main.js"></script>-->
+  <link rel="stylesheet" href="style.css">
+  <script src="action.js"></script>
 </head>
 
 <body>
   <nav>
     <a href="..">🏠 Index</a> / TP2
   </nav>
-  <h1>tp2</h1>
+  <h1>TP2</h1>
   <!-- Add your site or application content here -->
-  <p>Hello world! This is HTML5 Boilerplate.</p>
+  <!-- <p>Hello world! This is HTML5 Boilerplate.</p> -->
   <img src="../galilee.png" alt="Logo Galilee" />
 
+  <!-- <div class="container"> -->
   <!-- Form starts here -->
   <form action="action.html" method="get">
-    <!-- Nom -->
-    <label for="name">Nom:</label>
-    <input type="text" id="name" name="name" minlength="2" maxlength="20" required />
-    <span class="valid-icon">✔️</span>
-
-    <!-- Prénom -->
-    <label for="firstname">Prénom:</label>
-    <input type="text" id="firstname" name="firstname" minlength="2" maxlength="20" required />
-    <span class="valid-icon">✔️</span>
-
-    <!-- Date de naissance -->
-    <label for="birthday">Date de naissance:</label>
-    <input type="date" id="birthday" name="birthday" required />
-    <span class="valid-icon">✔️</span>
-
-    <!-- Adresse -->
-    <label for="address">Adresse:</label>
-    <input type="text" id="address" name="address" minlength="5" maxlength="50" required />
-    <span class="valid-icon">✔️</span>
-
-    <!-- Email -->
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" minlength="5" maxlength="30" required />
-    <span class="valid-icon">✔️</span>
-
-    <!-- Submit button -->
-    <br>
-    <input type="submit" value="Envoyer" />
-  </form>
+    <p>
+        <label for="name">Nom</label>
+        <input type="text" id="name" name="name" minlength="2" maxlength="20" required />
+        <span class="icon-ok">✔</span>
+    </p>
+    <p>
+        <label for="firstname">Prénom</label>
+        <input type="text" id="firstname" name="firstname" minlength="2" maxlength="20" required />
+        <span class="icon-ok">✔</span>
+    </p>
+    <p>
+        <label for="birthday">Date de naissance</label>
+        <input type="date" id="birthday" name="birthday" required/>
+        <span class="icon-ok">✔</span>
+    </p>
+    <p>
+        <label for="address">Adresse postale</label>
+        <input type="text" id="address" name="address" minlength="5" maxlength="50" required />
+        <span class="icon-ok">✔</span>
+    </p>
+    <p>
+        <label for="email">Adresse mail</label>
+        <input type="email" id="email" name="email" minlength="5" maxlength="30" required />
+        <span class="icon-ok">✔</span>
+    </p>
+    <p>
+        <input type="submit" class="btn-primary" value="Envoyer" />
+    </p>
+</form>
 </body>
 
 </html>

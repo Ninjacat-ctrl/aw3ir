@@ -1,0 +1,63 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: block;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-top: 20px;
+}
+
+div {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+    margin: 20px auto;
+    max-width: 1000px;
+    width: calc(100% - 40px);
+}
+
+p {
+    font-size: 1rem;
+    color: #333;
+}
+
+.btn-primary {
+    border-radius: 5px;
+    padding: 6px 12px;
+    background-color: #0d6efd;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+
+.btn-primary:hover {
+    background-color: #0b5ed7;
+}
+
+/* Specific styles for the action.html page */
+#name, #firstname, #birthday, #address, #email {
+    font-weight: bold;
+}
+
+#birthday::after {
+    content: attr(data-day) "/" attr(data-month) "/" attr(data-year);
+}
+
+a#address, a#email {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+a#address:hover, a#email:hover {
+    text-decoration: underline;
+}

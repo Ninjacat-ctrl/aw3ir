@@ -1,0 +1,80 @@
+/* General form styles */
+form {
+    background-color: #fff;
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+    max-width: 500px;
+    margin: auto;
+}
+
+/* Label and input styles */
+label {
+    width: 150px;
+    display: inline-block;
+    font-weight: bold;
+}
+
+input {
+    width: 250px;
+    padding: 6px 12px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+/* Button styles */
+.btn-primary {
+    border-radius: 5px;
+    padding: 6px 12px;
+    background-color: #0d6efd;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+/* Disabled submit button when form is invalid */
+form:invalid input[type="submit"] {
+    background-color: gray;
+}
+
+/* Invalid field styles */
+input:invalid {
+    border-color: red;
+}
+
+/* Hide the emoji if the input is invalid */
+input:invalid + .icon-ok {
+    display: none;
+}
+
+/* Show the emoji if the input is valid */
+input:valid + .icon-ok {
+    display: inline-block;
+}
+
+/* Specific styles for the action.html page */
+
+div {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;
+    margin: 20px auto;
+    max-width: 1000px;
+    width: calc(100% - 40px);
+}
+/* #name, #firstname, #birthday, #address, #email {
+    font-weight: bold;
+} */
+
+a#address, a#email {
+    color: #0d6efd;
+    text-decoration: none;
+}
+
+a#address:hover, a#email:hover {
+    text-decoration: underline;
+}
