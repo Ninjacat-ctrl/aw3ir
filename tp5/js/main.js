@@ -10,7 +10,7 @@ window.onload = function () {
             formCityName: "",
 
             // Messages à afficher dans l'application
-            message: "WebApp Loaded.",
+            message: "",
             messageForm: "",
 
             // Liste des villes saisies, initialisée avec Paris
@@ -104,6 +104,7 @@ window.onload = function () {
                 this.messageForm = "";
             },
             meteo: function (_city) {
+                this.message = null;
                 this.cityWeatherLoading = true;
 
                 // appel AJAX avec fetch pour récupérer la météo via l'API OpenWeatherMap
