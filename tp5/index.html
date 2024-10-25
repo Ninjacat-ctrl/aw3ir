@@ -2,43 +2,35 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>TP5</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>TP5</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1 shrink-to-fit=no">
 
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <!-- Place favicon.ico in the root directory -->
-
-    <style>
-        body {
-            background-color: #e9ebee;
-            font-family: system, -apple-system, ".SFNSText-Regular", "San Francisco", "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
-            font-size: 16px;
-            margin: 0 auto;
-            max-width: 800px;
-        }
-    </style>
-
-    <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="css/weather-icons.min.css">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <!-- Place favicon.ico in the root directory -->
 
 
-    <!--<script src="main.js"></script>-->
-        <!-- JS Bootstrap -->
-        <script src="js/libs/bootstrap.bundle.js"></script>
-        <!-- VueJS -->
-        <script src="js/libs/vue.js"></script>
-        <!-- Script principal de l'application -->
-        <script src="js/main.js"></script>
+
+  <!-- Code à dé-commenter si besoin de fichier CSS ou JS -->
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <link rel="stylesheet" href="css/weather-icons.min.css">
+
+
+  <!--<script src="main.js"></script>-->
+  <!-- JS Bootstrap -->
+  <script src="js/libs/bootstrap.bundle.js"></script>
+  <!-- VueJS -->
+  <script src="js/libs/vue.js"></script>
+  <!-- Script principal de l'application -->
+  <script src="js/main.js"></script>
 </head>
 
 <body>
   <nav>
-      <a href="..">🏠 Index</a> / TP5
+    <a href="..">🏠 Index</a> / TP5
   </nav>
 
   <div id="weatherApp" class="container">
@@ -47,15 +39,8 @@
     <h3>Ajouter une ville</h3>
     <form v-on:submit="addCity">
       <div class="input-group">
-        <input
-          type="search"
-          class="form-control"
-          v-model="formCityName"
-          placeholder="Entrez le nom de la ville..."
-          aria-label="Search for..."
-          autofocus
-          required
-        />
+        <input type="search" class="form-control" v-model="formCityName" placeholder="Entrez le nom de la ville..."
+          aria-label="Search for..." autofocus required />
         <span class="input-group-btn">
           <button class="btn btn-primary" type="submit">Ajouter</button>
         </span>
@@ -68,11 +53,8 @@
 
     <h4>Liste des villes ({{ cityList.length }})</h4>
     <ul class="list-group mb-3 w-75">
-      <li
-        v-for="city in cityList"
-        :key="city.name"
-        class="list-group-item d-flex justify-content-between align-items-center"
-      >
+      <li v-for="city in cityList" :key="city.name"
+        class="list-group-item d-flex justify-content-between align-items-center">
         <!-- Nom de la ville -->
         <div class="city-name flex-grow-1" @click="meteo(city)" style="cursor: pointer;">
           {{ city.name }}
@@ -84,18 +66,14 @@
         </div>
         <!-- Bouton de suppression -->
         <div>
-          <button
-            @click.stop="remove(city)"
-            class="btn btn-danger btn-sm"
-            title="Supprimer de la liste"
-          >
+          <button @click.stop="remove(city)" class="btn btn-danger btn-sm" title="Supprimer de la liste">
             &times;
           </button>
         </div>
       </li>
     </ul>
-    
-    
+
+
 
     <div class="alert alert-primary" role="alert" v-if="cityList.length == 0">
       Aucune ville de saisie!
@@ -104,11 +82,9 @@
     <!-- Affichage de la météo détaillée si disponible -->
     <div v-if="cityWeather" class="card mt-4 animate__animated animate__fadeIn" style="width: 18rem;">
       <div class="card-header">{{ cityWeather.name }}</div>
-      <img
-        class="card-img-top"
+      <img class="card-img-top"
         v-bind:src="'https://maps.googleapis.com/maps/api/staticmap?markers=' + cityWeather.coord.lat + ',' + cityWeather.coord.lon + '&zoom=14&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg'"
-        alt="Carte de la ville"
-      />
+        alt="Carte de la ville" />
       <div class="card-body">
         <h5 class="card-title">
           <i v-bind:class="'wi wi-owm-day-' + cityWeather.weather[0].id"></i>
@@ -118,35 +94,36 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex align-items-center">
-          <i class="wi wi-cloud me-2"></i> 
+          <i class="wi wi-cloud me-2"></i>
           <span>Nuages : {{ cityWeather.clouds.all }}%</span>
         </li>
         <li class="list-group-item d-flex align-items-center">
-          <i class="wi wi-humidity me-3"></i> 
+          <i class="wi wi-humidity me-3"></i>
           <span>Humidité : {{ cityWeather.main.humidity }}%</span>
         </li>
         <li class="list-group-item d-flex align-items-center">
-          <i class="wi wi-strong-wind me-2"></i> 
+          <i class="wi wi-strong-wind me-2"></i>
           <span>Vent : {{ cityWeather.wind.speed }} km/h</span>
         </li>
         <li class="list-group-item d-flex align-items-center">
-          <i class="wi wi-sunrise me-2"></i> 
+          <i class="wi wi-sunrise me-2"></i>
           <span>Lever du soleil : {{ new Date(cityWeather.sys.sunrise * 1000).toLocaleTimeString() }}</span>
         </li>
         <li class="list-group-item d-flex align-items-center">
-          <i class="wi wi-sunset me-2"></i> 
+          <i class="wi wi-sunset me-2"></i>
           <span>Coucher du soleil : {{ new Date(cityWeather.sys.sunset * 1000).toLocaleTimeString() }}</span>
         </li>
-      </ul>      
+      </ul>
     </div>
     <div v-else-if="message" class="card-body">
       <div class="alert alert-danger" role="alert">{{ message }}</div>
-  </div>    
-  </div>
-
-    
+    </div>
     <!-- <p>Hello world! This is HTML5 Boilerplate.</p> -->
     <img src="../galilee.png" alt="Logo Galilee" />
+  </div>
+
+
+
 </body>
 
 </html>
