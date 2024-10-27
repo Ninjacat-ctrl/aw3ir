@@ -158,6 +158,7 @@ main {
   fill: var(--gray-900);
 }
 
+
 @media screen and (max-width: 650px) {
   .content {
     flex-direction: column;
