@@ -1,0 +1,28 @@
+/* Styles pour aligner les températures et icônes */
+.city-weather {
+    margin-left: auto;
+    /* Repousse le bloc météo vers la droite */
+    text-align: right;
+}
+
+.city-name {
+    margin-right: 10px;
+    /* Ajouter un peu d'espace entre le nom de la ville et les autres éléments */
+}
+
+.list-group-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.city-weather i {
+    font-size: 1.2em;
+    /* Ajuste la taille de l'icône, si nécessaire */
+    margin-right: 5px;
+    /* Espacement entre l'icône et la température */
+}
+
+.city-weather span {
+    font-weight: bold;
+}

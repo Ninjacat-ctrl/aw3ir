@@ -40,16 +40,33 @@
 
     <!-- Listing des villes, boucle sur l'array : cityList -->
     <h4>Liste des villes ({{cityList.length}})</h4>
-    <ul class="list-group">
-      <li *ngFor="let city of cityList" class="list-group-item d-flex justify-content-between align-items-center">
-        <a routerLink="/meteo/{{city.name}}" class="d-block w-100">
-          {{city.name}}
-        </a>
-        <button (click)="remove(city)" class="btn btn-secondary btn-sm pull-right" title="Supprimer de la liste">
-          &times;
-        </button>
-      </li>
-    </ul>
+    <!-- Liste des villes (sous forme de tableau) -->
+    <div class="table-responsive mt-4">
+      <table class="table align-middle mb-0">
+        <tbody>
+          <tr *ngFor="let city of cityList; let i = index" class="align-items-center"> <!-- Colonne Nom de la Ville -->
+            <td>
+              <a routerLink="/meteo/{{ city.name }}" class="city-name">
+                {{ city.name }}
+              </a>
+            </td>
+
+            <!-- Colonne Icône météo et Température -->
+            <td class="text-center" *ngIf="city.weather">
+              <i [ngClass]="'wi wi-owm-' + city.weather.icon" class="me-2"></i>
+              <span>{{ city.weather.temp | number: '1.0-0' }}°C</span>
+            </td>
+
+            <!-- Colonne Bouton de Suppression -->
+            <td class="text-end">
+              <button (click)="remove(city)" class="btn btn-secondary btn-sm pull-right" title="Supprimer de la liste">
+                &times;
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="alert alert-primary" role="alert" *ngIf="cityList.length==0">
       Aucune ville de saisie!
