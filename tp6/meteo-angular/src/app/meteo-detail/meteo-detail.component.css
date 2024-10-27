@@ -1,0 +1,40 @@
+body {
+    background-color: #f7f9fc;
+    /* Une couleur de fond douce */
+}
+
+.card {
+    margin: 20px auto;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.breadcrumb,
+.card-body,
+.list-group-item {
+    margin-bottom: 15px;
+}
+
+.temp-cold {
+    color: #007BFF;
+    /* Bleu pour les températures froides */
+    font-weight: bold;
+}
+
+.temp-mild {
+    color: #333;
+    /* Noir/gris pour les températures modérées */
+    font-weight: normal;
+}
+
+.temp-hot {
+    color: #FF5722;
+    /* Rouge/orange pour les températures chaudes */
+    font-weight: bold;
+}
+
+.temp-cold,
+.temp-mild,
+.temp-hot {
+    transition: color 0.5s ease, font-size 0.5s ease;
+}

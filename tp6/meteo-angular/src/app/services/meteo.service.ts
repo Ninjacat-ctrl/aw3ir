@@ -2,15 +2,15 @@ import { Injectable } from "@angular/core";
 
 @Injectable({ providedIn: "root" })
 export class MeteoService {
-  constructor() {}
+  constructor() { }
 
   getMeteo(name: string): Promise<any> {
     console.log("from service", name);
 
     return fetch(
       "https://api.openweathermap.org/data/2.5/weather/?q=" +
-        name +
-        "&units=metric&lang=fr&appid=78b56b662c11141512ffcb25aa5262b4"
+      name +
+      "&units=metric&lang=fr&appid=78b56b662c11141512ffcb25aa5262b4"
     )
       .then(function (response) {
         return response.json();
@@ -31,5 +31,21 @@ export class MeteoService {
           );
         }
       });
+
   }
+  getForecast(name: string): Promise<any> {
+    return fetch(
+      "https://api.openweathermap.org/data/2.5/forecast/?q=" +
+      name + "&units=metric&lang=fr&appid=78b56b662c11141512ffcb25aa5262b4"
+    )
+      .then((response) => response.json())
+      .then((json) => {
+        if (json.cod == "200") {
+          return Promise.resolve(json);
+        } else {
+          return Promise.reject("Prévisions introuvables pour " + name);
+        }
+      });
+  }
+
 }

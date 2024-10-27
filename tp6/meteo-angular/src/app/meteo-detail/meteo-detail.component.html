@@ -1,60 +1,112 @@
-<p>meteo-detail works!</p>
-<!-- meteo de la ville selectionnée -->
+<!-- <p>meteo-detail works!</p> -->
 <!-- meteo de la ville selectionnée -->
 <div *ngIf="meteo && meteo.cod == 200">
     <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
+        <ol class="breadcrumb bg-light p-2 rounded">
             <li class="breadcrumb-item">
-                <a routerLink="/">🏠</a>
+                <a routerLink="/" class="text-decoration-none">🏠 Accueil</a>
             </li>
             <li class="breadcrumb-item active" aria-current="page">
                 Météo pour {{meteo.name}}
             </li>
         </ol>
     </nav>
-
     <div class="card" style="width:300px; margin: 0 auto" v-if="meteo">
         <div class="card-header">
-            {{ meteo.name }} / {{ meteo.dt * 1000 | date : "EEEE d LLLL HH:mm" }}
+            {{ meteo.name }} / {{ meteo.dt * 1000 | date : "EEEE d MMMM HH:mm" : "fr-FR" }}
         </div>
-        <a href="http://maps.google.com/maps?q={{ latlon }}&ll={{ latlon }}&z=5" target="_blank">
-            <img class="card-img-top" src="https://maps.googleapis.com/maps/api/staticmap?markers={{
-            latlon
-          }}&zoom=5&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg" alt="Card image cap" />
+        <a href="http://maps.google.com/maps?q={{ latlon }}&ll={{ latlon }}&z=12" target="_blank">
+            <img class="card-img-top"
+                src="https://maps.googleapis.com/maps/api/staticmap?markers={{ latlon }}&zoom=12&size=400x300&scale=2&key=AIzaSyAkmvI9DazzG9p77IShsz_Di7-5Qn7zkcg"
+                alt="Card image cap" />
         </a>
+        <a href="http://maps.google.com/maps?q={{ latlon }}&ll={{ latlon }}&z=12" target="_blank"
+            class="btn btn-primary btn-sm mt-2">
+            Voir sur Google Maps
+        </a>
+
         <div class="card-body">
             <h5 class="card-title">
-                <i v-bind:class="'wi wi-owm-day-'+meteo.weather[0].id"></i>
-                {{meteo.main.temp}}
-                <i class="wi wi-celsius"></i>
+                <i class="wi wi-owm-day-{{ meteo.weather[0].id }} weather-icon" style="font-size: 1.5em;"></i>
+                <span [ngClass]="getTemperatureClass(meteo.main.temp)" style="font-size: 1.5em;">
+                    {{ meteo.main.temp | number:'1.0-0' }} <i class="wi wi-celsius" style="font-size: 1em;"></i>
+                </span>
             </h5>
-            <p class="card-text">{{meteo.weather[0].description}}</p>
+            <p class="card-text">{{ meteo.weather[0].description }}</p>
+
+            <!-- <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-cloud me-2"></i> Nuage: {{meteo.clouds.all}}%
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-humidity me-3"></i> Humidité: {{meteo.main.humidity}}%
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-windy me-2"></i> Vent: {{meteo.wind.speed}} km/h
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-sunrise me-2"></i> Levé du soleil: {{meteo.sys.sunrise * 1000 | date: 'H:mm'}}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-sunset me-2"></i> Couché du soleil: {{meteo.sys.sunset * 1000 | date: 'H:mm'}}
+                </li>
+            </ul> -->
+
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-cloud me-2"></i>
+                    Nuage: {{ meteo.clouds.all }}%
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-humidity me-3"></i>
+                    Humidité: {{ meteo.main.humidity }}%
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-windy me-2"></i>
+                    Vent: {{ meteo.wind.speed }} km/h
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-sunrise me-1"></i>
+                    Levé du soleil: {{ meteo.sys.sunrise * 1000 | date : 'H:mm' }}
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="wi wi-sunset me-1"></i>
+                    Couché du soleil: {{ meteo.sys.sunset * 1000 | date : 'H:mm' }}
+                </li>
+            </ul>
         </div>
-        <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <i class="wi wi-cloud"></i> Nuage: {{meteo.clouds.all}}%
-            </li>
-            <li class="list-group-item">
-                <i class="wi wi-humidity"></i> Humidité: {{meteo.main.humidity}}%
-            </li>
-            <li class="list-group-item">
-                <i class="wi wi-windy"></i> Vent: {{meteo.wind.speed}} km/h
-            </li>
-            <li class="list-group-item">
-                <i class="wi wi-sunrise"></i> Levé du soleil: {{meteo.sys.sunrise * 1000 | date: 'H:mm'}} //
-                Date au format Timestamp à transformer au format 'H:mm'
-            </li>
-            <li class="list-group-item">
-                <i class="wi wi-sunset"></i>Couché du soleil: {{meteo.sys.sunset * 1000 | date: 'H:mm'}} //
-                Date au format Timestamp à transformer au format 'H:mm'
-            </li>
-        </ul>
     </div>
+
+    <div class="alert alert-danger" *ngIf="meteo && meteo.cod != 200">
+        {{meteo.message}} (erreur {{meteo.cod}})
+    </div>
+
+    <div class="container mt-4">
+        <h3 class="mt-4">Prévisions sur 5 jours</h3>
+        <div class="row justify-content-center">
+            <div *ngFor="let forecast of dailyForecast" class="col-md-2 col-sm-4">
+                <div class="card text-center mb-3 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ forecast.dt_txt | date:'EEEE d MMMM' }}</h5>
+                        <p class="card-text">
+                            <i class="wi wi-owm-day-{{ forecast.weather[0].id }} weather-icon"
+                                style="font-size: 1em;"></i>
+                            <br>
+                            <span [ngClass]="getTemperatureClass(forecast.main.temp)" style="font-size: 1.5em;">{{
+                                forecast.main.temp |
+                                number:'1.0-0'
+                                }}
+                                <i class="wi wi-celsius"></i></span>
+                            <br>
+                            <small>{{ forecast.weather[0].description }}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<div class="alert alert-danger" *ngIf="meteo && meteo.cod != 200">
-    {{meteo.message}} (erreur {{meteo.cod}})
-</div>
-
-<hr />
-{{meteo | json}}
+<!-- {{meteo | json}} -->
+<!-- <pre>{{ forecast | json }}</pre> -->

@@ -7,11 +7,14 @@ import { DatePipe } from "@angular/common";
 // <-- dans la suite du TP, Ajouter les références aux autres modules ici aussi
 
 import { AppComponent } from "./app.component";
-import {AppRoutingModule } from "./app-routing.module";
+import { AppRoutingModule } from "./app-routing.module";
 import { MeteoComponent } from "./meteo/meteo.component";
 import { RouterModule, Routes } from "@angular/router";
 import { MeteoDetailComponent } from './meteo-detail/meteo-detail.component';
 // <-- dans la suite du TP, Ajouter les références à MeteoDetailComponent aussi
+import { registerLocaleData } from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import { LOCALE_ID } from '@angular/core';
 
 
 const appRoutes: Routes = [
@@ -49,7 +52,14 @@ const appRoutes: Routes = [
       { enableTracing: true } // <-- debugging purposes only
     ),
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    { provide: LOCALE_ID, useValue: 'fr-FR' }
+  ],
+
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    registerLocaleData(localeFr);
+  }
+}
