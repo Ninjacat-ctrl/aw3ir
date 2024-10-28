@@ -34,8 +34,12 @@
         <div *ngIf="name.errors && name.errors['minlength']">
           Doit contenit au moins 3 caratères.
         </div>
+
       </div>
     </form>
+    <div *ngIf="errorMessage" class="alert alert-danger mt-3">
+      {{ errorMessage }}
+    </div>
     <hr />
 
     <!-- Listing des villes, boucle sur l'array : cityList -->
@@ -71,6 +75,7 @@
     <div class="alert alert-primary" role="alert" *ngIf="cityList.length==0">
       Aucune ville de saisie!
     </div>
+
 
     <hr />
   </div>

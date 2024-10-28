@@ -18,6 +18,7 @@ export class MeteoComponent implements OnInit {
 
   constructor(private meteoService: MeteoService) { }
 
+
   ngOnInit() {
     // const storedList = localStorage.getItem("cityList");
 
@@ -51,22 +52,60 @@ export class MeteoComponent implements OnInit {
     }
   }
 
-  onSubmit() {
-    if (
-      this.city.name !== undefined &&
-      this.isCityExist(this.city.name) === false
-    ) {
-      let currentCity = new MeteoItem();
-      currentCity.name = this.city.name;
-      this.cityList.push(currentCity);
-      this.fetchWeatherForCity(currentCity);
-      this.saveCityList();
+  // Ajouter une variable pour le message d'erreur
+  errorMessage: string = "";
 
-      console.log(this.city.name, "ajouté à la dans la liste");
+  // onSubmit() {
+  //   if (
+  //     this.city.name !== undefined &&
+  //     this.isCityExist(this.city.name) === false
+  //   ) {
+  //     let currentCity = new MeteoItem();
+  //     currentCity.name = this.city.name;
+  //     this.cityList.push(currentCity);
+  //     this.fetchWeatherForCity(currentCity);
+  //     this.saveCityList();
+
+  //     console.log(this.city.name, "ajouté à la dans la liste");
+  //   } else {
+  //     console.log(this.city.name, "existe déjà dans la liste");
+  //   }
+  // }
+  onSubmit() {
+    if (this.city.name && this.isCityExist(this.city.name) === false) {
+      this.meteoService.getMeteo(this.city.name)
+        .then(response => {
+          if (response && response.weather) {
+            // Ajouter la ville si la météo est disponible
+            const currentCity = new MeteoItem();
+            currentCity.name = this.city.name;
+            currentCity.weather = {
+              icon: response.weather[0].id,
+              temp: response.main.temp
+            };
+
+            this.cityList.push(currentCity); // Ajouter la ville avec météo à cityList
+            this.saveCityList(); // Sauvegarder la liste mise à jour dans localStorage
+
+            // Réinitialiser le champ de saisie après ajout réussi
+            this.city.name = "";
+            this.errorMessage = ""; // Réinitialiser le message d'erreur
+
+            console.log(currentCity.name, "ajouté à la liste avec succès");
+          }
+        })
+        .catch(error => {
+          // Afficher un message d'erreur si la ville n'existe pas
+          console.error("Erreur : la ville n'existe pas", error);
+          this.errorMessage = "La ville que vous avez saisie n'existe pas ou les données sont indisponibles.";
+        });
     } else {
       console.log(this.city.name, "existe déjà dans la liste");
+      this.errorMessage = "La ville est déjà présente dans la liste.";
     }
   }
+
+
 
   remove(_city: MeteoItem) {
     // on utilise 'filter' pour retourne une liste avec tous les items ayant un nom différent de _city.name
